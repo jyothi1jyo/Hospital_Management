@@ -1,0 +1,27 @@
+{
+  "DoctorDB": {
+    "host": "localhost",
+    "database": "doctorDB",
+    "password": "12345",
+    "name": "DoctorDB",
+    "user": "postgres",
+    "connector": "postgresql"
+  },
+  "DoctorEmail": {
+    "name": "DoctorEmail",
+    "connector": "mail",
+    "transports": [
+        {
+          "type": "SMTP",
+          "host": "smtp.gmail.com",
+          "secure": true,
+          "port": 465,
+          "service": "Gmail",
+          "auth": {
+            "user": "findYourDoctor123@gmail.com",
+            "pass": "Admintest"
+          }
+        }
+      ]
+  }
+}

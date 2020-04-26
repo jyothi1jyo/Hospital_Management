@@ -1,0 +1,82 @@
+{
+  "name": "Users",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "status": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "appointments": {
+      "type": "hasMany",
+      "model": "Appointment",
+      "foreignKey": ""
+    },
+    "userProfiles": {
+      "type": "hasOne",
+      "model": "UserProfile",
+      "foreignKey": ""
+    }
+  },
+  "acls": [{
+    "principalType": "ROLE",
+    "principalId": "admin",
+    "permission": "ALLOW",
+    "property": "*"
+  }, {
+    "principalType": "ROLE",
+    "principalId": "$unauthenticated",
+    "permission": "ALLOW",
+    "property": "login"
+  }, {
+    "principalType": "ROLE",
+    "principalId": "$unauthenticated",
+    "permission": "ALLOW",
+    "property": "appUserSignup"
+  }, {
+    "accessType": "*",
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "DENY"
+  }, {
+    "accessType": "*",
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__get__userProfiles"
+  }, {
+    "accessType": "*",
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__update__userProfiles"
+  }],
+  "methods": {
+    "appUserSignup": {
+      "accepts": [{
+        "arg": "appuser",
+        "type": "object",
+        "required": true,
+        "description": "Data to register a new user: email, password, phoneNo, firstName, lastName, birthday, gender, companyCode, companyId, cprNumber"
+      }],
+      "returns": [{
+        "arg": "user",
+        "type": "object",
+        "root": true,
+        "description": "the created user"
+      }],
+      "description": "Creates a new appuser user",
+      "http": [{
+        "path": "/appUserSignup",
+        "verb": "post"
+      }]
+    }
+  }
+}

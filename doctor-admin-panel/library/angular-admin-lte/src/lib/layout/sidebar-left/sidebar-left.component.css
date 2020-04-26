@@ -1,0 +1,12 @@
+.treeview-menu.collapse {
+  display: none;
+}
+
+.treeview-menu,
+.treeview-menu.collapse.in {
+  display: block;
+}
+.sidebar-menu li .is-active {
+  color: #ffffff;
+  background: #1e282c;
+}
